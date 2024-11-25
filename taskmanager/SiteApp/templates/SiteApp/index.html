@@ -1,31 +1,14 @@
 {% extends "SiteApp/base.html" %}
-{% load static %}
+
 
 {% block content %}
-        <nav class="bg-white shadow-lg"> 
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="flex justify-between">
-                    <div class="flex space-x-7">
-                        <div >
-                            <a href="#" class="flex items-center px-2 py-4">
-                            <img class="h-8 w-8" src="{% static 'SiteApp/images/shop.png' %}" alt="logo" />
-                            <span class="text-blue-500 font-semibold text-xl">Good Shop</span>
-                        </a>
-                        </div>
-                        <div class="items-center flex space-x-1">
-                            <a href="#" class="py-4 px-2 text-black-500 font-semibold border-b-4 border-yellow-400">Home</a>
-                            <a href="#" class="py-4 px-2 text-black-500 font-semibold">About</a>
-                            <a href="#" class="py-4 px-2 text-black-500 font-semibold">Contacts</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
         <h4>  
             <!--<a href="/SiteApp/hello/{{item.id}}/"></a>-->
             {% for item in items %}
             <a href="{% url 'SiteApp:detail' item.id %}">
             ID:{{item.id}} Имя: {{item.name}} | Цена:{{item.price}} | {{item.description}} </br>
+                <img src="{{item.image.url}}" alt="">
             <a>
             {% endfor %}
         </h4>
