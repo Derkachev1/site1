@@ -12,7 +12,7 @@ def index(request):
 def indexItem(request, item_id):
     items = Product.objects.get(id=item_id)
     context = {
-        "items":items
+        "item":items
     }
     return render(request, "SiteApp/detail.html", context=context)
 
