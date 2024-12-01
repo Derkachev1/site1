@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     "SiteApp",
+    "users",
 ]
 
 MIDDLEWARE = [
