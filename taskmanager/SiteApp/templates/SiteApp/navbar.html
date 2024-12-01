@@ -4,7 +4,7 @@
         <div class="flex justify-between">
             <div class="flex space-x-7">
                 <div >
-                    <a href="#" class="flex items-center px-2 py-4">
+                    <a href="{% url 'SiteApp:index' %}" class="flex items-center px-2 py-4">
                     <img class="h-8 w-8" src="{% static 'SiteApp/images/shop.png' %}" alt="logo" />
                     <span class="text-blue-500 font-semibold text-xl">Good Shop</span>
                 </a>
@@ -13,6 +13,11 @@
                     <a href="#" class="py-4 px-2 text-black-500 font-semibold border-b-4 border-yellow-400">Home</a>
                     <a href="#" class="py-4 px-2 text-black-500 font-semibold">About</a>
                     <a href="#" class="py-4 px-2 text-black-500 font-semibold">Contacts</a>
+                    {% if user.is_authenticated %}
+                        <a class="py-4 px-2 text-black-500 font-semibold" href="{% url 'users:logout' %}">Logout</a>
+                        {% else %}
+                        <a class="py-4 px-2 text-black-500 font-semibold" href="{% url 'users:login' %}">Login</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

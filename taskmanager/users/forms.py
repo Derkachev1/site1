@@ -10,6 +10,13 @@ class NewUserForm(UserCreationForm):
     password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={"class":"focus:outline-none", "placeholder":"Confirm Password"}))
 
 
-class Meta:
-    model = User
-    fields = ("email", "username", "password1", "password2")
+    class Meta:
+        model = User
+        fields = ("email", "username", "password1", "password2")
+
+    #def save(self, commit=True):
+    #    user = super(NewUserForm, self).save(commit=False)
+    #    user.email = self.cleaned_data["email"]
+    #    if commit:
+    #        user.save()
+    #    return user
