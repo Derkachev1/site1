@@ -10,7 +10,5 @@ def register(request):
             login(request, user)
             return redirect("SiteApp:index")
     form = NewUserForm()
-    context = {
-        'form':form
-    }
+    context = {'form':form}
     return render(request, 'users/register.html', context)
