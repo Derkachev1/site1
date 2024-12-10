@@ -52,3 +52,4 @@ def delete_item(request, item_id):
 
 def mainpage(request):
     return HttpResponse("Главная страница")
+
