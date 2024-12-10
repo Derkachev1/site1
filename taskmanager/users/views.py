@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import NewUserForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method == "POST":
@@ -18,3 +19,11 @@ def register(request):
 def profile(request):
     return render(request, "users/profile.html")
 
+def seller_profile(request, id):
+    seller = User(id=id)
+
+    context = {
+        'seller': seller
+    }
+
+    return render(request, "users/sellerprofile.html", context)
