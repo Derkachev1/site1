@@ -2,20 +2,31 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 
-def index(request):
-    item = Product.objects.all()
-    context = {
-        "items":item
-    }
-    return render(request, "SiteApp/index.html", context)
+#def index(request):
+ #   item = Product.objects.all()
+ #   context = {
+ #       "items":item
+  #  }
+  #  return render(request, "SiteApp/index.html", context)
 
-def indexItem(request, item_id):
-    items = Product.objects.get(id=item_id)
-    context = {
-        "item":items
-    }
-    return render(request, "SiteApp/detail.html", context=context)
+class ProductListView(ListView):
+    model = Product
+    template_name = "SiteApp/index.html"
+    context_object_name = "items"
+
+#def indexItem(request, item_id):
+ #   items = Product.objects.get(id=item_id)
+  #  context = {
+  #      "item":items
+  #  }
+  #  return render(request, "SiteApp/detail.html", context=context)
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "SiteApp/detail.html"
+    context_object_name = "item"
 
 @login_required
 def add_item(request):
