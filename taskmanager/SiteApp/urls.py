@@ -11,5 +11,8 @@ urlpatterns = [
     path('additem/', views.add_item, name="add_item"),
     path('updateitem/<int:item_id>/', views.update_item, name="update_item"),
     path('deleteitem/<int:pk>/', views.ProductDeleteView.as_view(), name="delete_item"),
-    path('mainpage/', views.mainpage),
+    path('success/', views.PaymentSuccessView.as_view(), name="success"),
+    path('failed/', views.PaymentFailedView.as_view(), name="failed"),
+    path('api/checkout-session/<int:id>/', views.update_item, name="api_checkout_session"),
+    #path('mainpage/', views.mainpage),
 ]

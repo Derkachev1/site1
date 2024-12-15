@@ -10,8 +10,32 @@
         <p class="mt-5 text-black-500">  {{item.description}}</p>
         <p class="mt-5 text-black-500"><a href="{% url 'users:sellerprofile' item.id %}">@{{item.seller}}</a></p>
         <p class="mt-5 text-black-500">{{item.seller.profile.contact_number}}</p>
-        <button class="bg-green-500 text-black mt-[50px]"><a href="{% url 'SiteApp:update_item' item.seller.id %}">Update Item</a></button>
+        <button class="bg-green-500 text-black mt-[50px]"><a href="{% url 'SiteApp:update_item' item.id %}">Update Item</a></button>
         <button class="bg-red-500 text-black mt-[50px]"><a href="{% url 'SiteApp:delete_item' item.id %}">Delete Item</a></button>
+        <button class="bg-green-500 text-black mt-[50px]" id="checkout">Checkout</button>
     </div>
 </div>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+    var stripe = Stripe('{{stripe_publishable_key}}')
+    var checkoutButton = document.getElementById('checkout')
+    checkoutButton.addEventListener('click', function(){
+        fetch("{% url 'SiteApp:api_checkout_session' id=item.id %}", {method: 'POST',})
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function nae(session){
+            return stripe.redirectToCheckout({sessionId:session.sessionId})
+        })
+        .then(function(result){
+            if (result.error){
+                alert(result.error.message)
+            }
+        })
+        .catch(function(error){
+            console.log('Error', error);
+            
+        })
+    })
+</script>
 {% endblock content %}
